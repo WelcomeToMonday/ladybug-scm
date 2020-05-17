@@ -38,9 +38,9 @@ namespace Ladybug.SceneManagement
 		/// <param name="scene"></param>
 		public virtual void LoadScene(Scene scene)
 		{
+			SceneList.Add(scene);
 			scene.LoadContent();
 			scene.Initialize();
-			SceneList.Add(scene);
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace Ladybug.SceneManagement
 		public virtual void PauseScene(Scene scene)
 		{
 			scene.Pause();
-			scene.State = SceneState.PAUSED;
+			//scene.State = SceneState.PAUSED;
 		}
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Ladybug.SceneManagement
 		public virtual void UnpauseScene(Scene scene)
 		{
 			scene.Unpause();
-			scene.State = SceneState.ACTIVE;
+			//scene.State = SceneState.ACTIVE;
 		}
 
 		/// <summary>
@@ -81,7 +81,7 @@ namespace Ladybug.SceneManagement
 		public virtual void SuspendScene(Scene scene)
 		{
 			scene.Suspend();
-			scene.State = SceneState.SUSPENDED;
+			//scene.State = SceneState.SUSPENDED;
 		}
 
 		/// <summary>
@@ -91,7 +91,7 @@ namespace Ladybug.SceneManagement
 		public virtual void UnsuspendScene(Scene scene)
 		{
 			scene.Unsuspend();
-			scene.State = SceneState.ACTIVE;
+			//scene.State = SceneState.ACTIVE;
 		}
 
 		protected override void Initialize()

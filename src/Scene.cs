@@ -71,22 +71,22 @@ namespace Ladybug.SceneManagement
 
 		public virtual void Pause()
 		{
-
+			State = SceneState.PAUSED;
 		}
 
 		public virtual void Unpause()
 		{
-			
+			if (State == SceneState.PAUSED) State = SceneState.ACTIVE;
 		}
 
 		public virtual void Suspend()
 		{
-
+			State = SceneState.SUSPENDED;
 		}
 
 		public virtual void Unsuspend()
 		{
-
+			if (State == SceneState.SUSPENDED) State = SceneState.ACTIVE;
 		}
 	}
 }
