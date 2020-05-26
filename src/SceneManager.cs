@@ -38,9 +38,9 @@ namespace Ladybug.SceneManagement
 		/// <param name="scene"></param>
 		public virtual void LoadScene(Scene scene)
 		{
-			scene.LoadContent();
-			scene.Initialize();
 			SceneList.Add(scene);
+			if (!scene.ContentLoaded) scene.LoadContent();
+			if (!scene.Initialized) scene.Initialize();
 		}
 
 		/// <summary>

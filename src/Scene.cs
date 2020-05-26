@@ -21,6 +21,9 @@ namespace Ladybug.SceneManagement
 	{
 		protected SpriteBatch spriteBatch;
 
+		public bool Initialized {get; private set;} = false;
+		public bool ContentLoaded {get; private set;} = false;
+
 		public Scene(SceneManager sceneManager) // Is there any way to make this not have to consume a sceneManager to work?
 		{
 			SceneManager = sceneManager;
@@ -46,12 +49,12 @@ namespace Ladybug.SceneManagement
 
 		public virtual void LoadContent()
 		{
-
+			ContentLoaded = true;
 		}
 
 		public virtual void Initialize()
 		{
-
+			Initialized = true;
 		}
 
 		public virtual void Update(GameTime gameTime)
