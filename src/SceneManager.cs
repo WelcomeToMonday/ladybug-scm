@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 
@@ -30,6 +33,22 @@ namespace Ladybug.SceneManagement
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			graphics.ApplyChanges(); //Sets the GraphicsDevice
+		}
+
+		/// <summary>
+		/// Loads a Scene asynchronously, calling its LoadContentAsync and InitializeAsync before
+		/// adding the scene to the SceneManager via LoadScene
+		/// </summary>
+		/// <param name="scene"></param>
+		/// <remarks>
+		/// Calls LoadScene, meaning the scene's LoadContent and LoadScene methods are called
+		/// after their async counterparts.
+		/// </remarks>
+		public async virtual void LoadSceneAsync(Scene scene)
+		{
+			if (!scene.ContentLoadedAsync) await Task.Run(()=>scene.LoadContentAsync());
+			if (!scene.InitializedAsync) await Task.Run(()=>scene.InitializeAsync());
+			LoadScene(scene);
 		}
 
 		/// <summary>
@@ -107,9 +126,8 @@ namespace Ladybug.SceneManagement
 			}
 		}
 
-
 		/// <summary>
-		/// Updates all Scenes managed by this SceneManager which are neither Paused or Suspended.
+		/// Updates all Scenes managed by this SceneManager which are neither Paused nor Suspended.
 		/// </summary>
 		/// <param name="gameTime"></param>
 		protected override void Update(GameTime gameTime)
@@ -135,7 +153,7 @@ namespace Ladybug.SceneManagement
 				if (scene.State != SceneState.SUSPENDED)
 				{
 					scene.Draw(gameTime);
-				}				
+				}
 			}
 			base.Draw(gameTime);
 		}
