@@ -112,6 +112,7 @@ namespace Ladybug.SceneManagement
 			if (!_firstUpdateComplete)
 			{
 				FirstUpdate();
+				_firstUpdateComplete = true;
 			}
 		}
 
