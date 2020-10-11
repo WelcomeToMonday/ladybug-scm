@@ -87,12 +87,14 @@ namespace Ladybug.SceneManagement
 		{
 			ContentLoadedAsync = true;
 			LoadContentAsyncComplete?.Invoke(this, new EventArgs());
+			ThreadManager.QueueAction(() => LoadContent());
 		}
 
 		public async virtual void InitializeAsync()
 		{
 			InitializedAsync = true;
 			InitializeAsyncComplete?.Invoke(this, new EventArgs());
+			ThreadManager.QueueAction(() => Initialize());
 		}
 
 		public virtual void LoadContent()

@@ -36,7 +36,7 @@ namespace Ladybug.SceneManagement
 			ThreadManager = new ThreadManager();
 		}
 
-		public ThreadManager ThreadManager {get; private set;}
+		public ThreadManager ThreadManager { get; private set; }
 
 		/// <summary>
 		/// Loads a Scene asynchronously, calling its LoadContentAsync and InitializeAsync before
@@ -49,9 +49,10 @@ namespace Ladybug.SceneManagement
 		/// </remarks>
 		public async virtual void LoadSceneAsync(Scene scene)
 		{
-			if (!scene.ContentLoadedAsync) await Task.Run(()=>scene.LoadContentAsync());
-			if (!scene.InitializedAsync) await Task.Run(()=>scene.InitializeAsync());
-			LoadScene(scene);
+			if (!scene.ContentLoadedAsync) await Task.Run(() => scene.LoadContentAsync());
+			if (!scene.InitializedAsync) await Task.Run(() => scene.InitializeAsync());
+			ThreadManager.QueueAction(() => LoadScene(scene));
+			//LoadScene(scene);
 		}
 
 		/// <summary>
