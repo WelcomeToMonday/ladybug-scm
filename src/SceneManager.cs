@@ -33,7 +33,10 @@ namespace Ladybug.SceneManagement
 			Content.RootDirectory = "Content";
 			IsMouseVisible = true;
 			graphics.ApplyChanges(); //Sets the GraphicsDevice
+			ThreadManager = new ThreadManager();
 		}
+
+		public ThreadManager ThreadManager {get; private set;}
 
 		/// <summary>
 		/// Loads a Scene asynchronously, calling its LoadContentAsync and InitializeAsync before
@@ -132,6 +135,7 @@ namespace Ladybug.SceneManagement
 		/// <param name="gameTime"></param>
 		protected override void Update(GameTime gameTime)
 		{
+			ThreadManager.Update();
 			for (var i = 0; i < SceneList.Count; i++)
 			{
 				if (SceneList[i].State == SceneState.ACTIVE)
