@@ -73,12 +73,15 @@ namespace Ladybug.SceneManagement
 		/// <param name="scene"></param>
 		public virtual void UnloadScene(Scene scene)
 		{
-			scene.Unload();
-			SceneList.Remove(scene);
+			if (SceneList.Contains(scene))
+			{
+				scene.Unload();
+				SceneList.Remove(scene);
+			}
 		}
 
 		/// <summary>
-		/// Pauses a Scene, skipping its <c>Update()<c>, but continuing to run its <c>Draw()</c>
+		/// Pauses a Scene, skipping its <c>Update()</c>, but continuing to run its <c>Draw()</c>
 		/// </summary>
 		/// <param name="scene"></param>
 		public virtual void PauseScene(Scene scene)
@@ -126,7 +129,7 @@ namespace Ladybug.SceneManagement
 		{
 			foreach (var scene in SceneList)
 			{
-				scene.LoadContent();
+				if (!scene.ContentLoaded) scene.LoadContent();
 			}
 		}
 
