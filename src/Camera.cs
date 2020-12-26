@@ -58,7 +58,7 @@ namespace Ladybug.SceneManagement
 			AllowedArea = r;
 		}
 
-		public void ClearAllowedArea(Rectangle r)
+		public void ClearAllowedArea()
 		{
 			_restrictedToArea = false;
 		}
